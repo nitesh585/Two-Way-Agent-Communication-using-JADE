@@ -16,24 +16,24 @@ public class Agent1 extends Agent {
 		public void action() {
 			// TODO Auto-generated method stub
 			ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+			
 			if(flag) {
-			msg.setContent("Ping");
-			msg.addReceiver(new AID("a2",AID.ISLOCALNAME));
-			send(msg);
-			flag=false;
+				msg.setContent("Ping").addReceiver(new AID("a2",AID.ISLOCALNAME));
+				send(msg);
+				flag=false;
 			}
-			String s = JOptionPane.showInputDialog("Message sent:\nAny question you want to ask?");
-			msg.setContent(s);
+			
+			String sentMsg = JOptionPane.showInputDialog("Message sent:\nAny question you want to ask?");
+			msg.setContent(sentMsg);
 			send(msg);
-		    ACLMessage msg2= receive();
-            if (msg2!=null) {
-                System.out.println( " - " +
-                   myAgent.getLocalName() + " <- " +
-                   msg2.getContent() );
-            }
+			
+		    	ACLMessage receiveMsg = receive();
+            		if (receiveMsg!=null) {
+                		System.out.println( " - " + myAgent.getLocalName() + " <- " + receiveMsg.getContent() );
+            		}
+			
 			block();
 		}
 	});
-	     
    }
 } 
